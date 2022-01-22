@@ -13,6 +13,7 @@ let horizontal; // current position on horizontal axis
 let vertical; // current position on vertical axis
 let heading;  // current heading
 let instructions; // list of instructions
+let outOfBounds = false
 
 // Read file
 fs.readFile(filename, 'utf-8', function(err, data) {
@@ -35,6 +36,10 @@ fs.readFile(filename, 'utf-8', function(err, data) {
 
         // Execute instructions
         for (let step of instructions){
+            if(outOfBounds){
+                console.log(`Out of bounds. Coordinates: x:${horizontal}, y: ${vertical}`)
+                return
+            }
             switch (step) {
                 case 'M':
                     moveForward(heading, horizontal, vertical, size)
@@ -65,28 +70,28 @@ function moveForward(){
         case 'N':
             vertical += 1
             if(vertical > size[1]){
-                console.log("Out of bounds")
+                outOfBounds = true
                 return
             }
             break;
         case 'S':
             vertical -= 1
             if(vertical < 1){
-                console.log("Out of bounds")
+                outOfBounds = true
                 return
             }
             break;
         case 'E':
             horizontal += 1
             if(horizontal > size[0]){
-                console.log("Out of bounds")
+                outOfBounds = true
                 return
             }
             break
         case 'W':
             horizontal -= 1
             if(vertical < 1){
-                console.log("Out of bounds")
+                outOfBounds = true
                 return
             }
             break
