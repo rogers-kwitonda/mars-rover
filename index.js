@@ -19,7 +19,7 @@ let outOfBounds = false
 fs.readFile(filename, 'utf-8', function(err, data) {
     if (err) throw err;
     // Get rows
-    let rows = data.split('\r\n')
+    let rows = data.split(/\r?\n/)
     if(rows.length < 3){
         console.log("Error: File improperly formatted")
         return
