@@ -30,6 +30,14 @@ commands (movements and rotations) to be executed by the rover.
 As a result of following these commands, a rover staring at **1 2 E** in this zone would land up
 at **3 3 S**. 
 
+## Design decisions
+To keep the solution simple, I used a for-loop to work through the list of commands. For each command, I created a function to perform the required movement. I made use of switch-case as it makes for easier reading than if statements. I added out-of-bounds error checking within the move forward instruction. All these instructions occur only after a successful read of the provided text file. Since there are no tuples in JavaScript, I used arrays to hold coordinates that are not constantly changing like the start and boundary coordinates. Integer and string variables were used to hold the rover's x,y coordinates and heading respectively.
+
+```javascript
+   let rows = data.split(/\r?\n/)
+```
+The above snippet is used to read the file accurately regardless of the operating system. I tested my solution with the provided example.
+
 ## Usage
 
 ```bash
